@@ -1,0 +1,86 @@
+:root {
+  --border: rgb(255, 255, 255);
+  --g1: rgb(255, 0, 0);
+  --g2: rgb(0, 255, 0);
+  --g3: rgb(0, 0, 255);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: rgb(0, 0, 0);
+}
+
+.card {
+  position: relative;
+  width: 56vmin;
+  aspect-ratio: 1 / 1.6;
+  border: 0.5vmin solid var(--border);
+  overflow: hidden; /* Clip the scaled gradient */
+  cursor: pointer;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: linear-gradient(
+    130deg,
+    transparent 0%,
+    /* transparent from 0%… */ transparent 33%,
+    /* …to 33% */ var(--g1) 66%,
+    var(--g2) 83.5%,
+    var(--g3) 100%
+  );
+  background-size: 300% 300%;
+  background-position: 0% 0%;
+  transition: background-position 350ms ease, transform 350ms ease;
+  z-index: 1;
+}
+
+.card:hover::before {
+  background-position: 100% 100%;
+  transform: scale(1.08, 1.03);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2; /* Sit above the gradient */
+  width: calc(100% - 10vmin);
+  height: calc(100% - 10vmin);
+  margin: 5vmin;
+  background: radial-gradient(rgba(255, 255, 255, 0.2) 8%, transparent 8%);
+  background-size: 5vmin 5vmin;
+  transition: background-position 350ms ease;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; Center text vertically */
+}
+
+.card:hover .card-content {
+  background-position: -10% 0%;
+}
+
+.card-title,
+.card-subtitle {
+  color: white;
+  font-family: "Anek Latin", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.card-title {
+  font-size: 6vmin;
+}
+
+.card-subtitle {
+  font-size: 3vmin;
+  margin-top: 2vmin;
+}
