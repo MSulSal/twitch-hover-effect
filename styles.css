@@ -13,8 +13,8 @@ body {
 
 body {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   background: rgb(0, 0, 0);
 }
 
@@ -23,19 +23,19 @@ body {
   width: 56vmin;
   aspect-ratio: 1 / 1.6;
   border: 0.5vmin solid var(--border);
-  overflow: hidden; /* Clip the scaled gradient */
+  overflow: hidden;
   cursor: pointer;
 }
 
 .card::before {
   content: "";
   position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  inset: 0;
   background: linear-gradient(
     130deg,
     transparent 0%,
-    /* transparent from 0%… */ transparent 33%,
-    /* …to 33% */ var(--g1) 66%,
+    transparent 33%,
+    var(--g1) 66%,
     var(--g2) 83.5%,
     var(--g3) 100%
   );
@@ -52,7 +52,7 @@ body {
 
 .card-content {
   position: relative;
-  z-index: 2; /* Sit above the gradient */
+  z-index: 2;
   width: calc(100% - 10vmin);
   height: calc(100% - 10vmin);
   margin: 5vmin;
@@ -61,7 +61,6 @@ body {
   transition: background-position 350ms ease;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; Center text vertically */
 }
 
 .card:hover .card-content {
@@ -83,4 +82,19 @@ body {
 .card-subtitle {
   font-size: 3vmin;
   margin-top: 2vmin;
+}
+
+.card-subtitle-word {
+  display: inline-block;
+  margin: 0vmin 0.3vmin;
+  position: relative;
+  transform: translateY(40%);
+  transition: none;
+  opacity: 0;
+}
+
+.card:hover > .card-content > .card-subtitle > .card-subtitle-word {
+  transform: translateY(0%);
+  transition: opacity 0ms, transform 200ms cubic-bezier(0.9, 0.06, 0.15, 0.9);
+  opacity: 1;
 }
